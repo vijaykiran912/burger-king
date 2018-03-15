@@ -11,7 +11,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 // import BurgerIngredient from '../../components/Burger/BurgerIngredient/BurgerIngredient';
 
-import * as actionTypes from '../../store/actions';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
 
@@ -84,9 +84,7 @@ class BurgerBuilder extends Component {
 
         let orderSummary = null;
         let burger = this.state.error ? <p>Ingredients cannot be loader </p> : <Spinner/>;
-        console.log(this.props.ings);
         if(this.props.ings){
-            console.log('true');
             burger = (
                 <Auxilary>
                 <Burger ingredients={this.props.ings}/>
@@ -128,8 +126,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
         return {
-            onIngredientAdded : (ingName) => dispatch({type : actionTypes.ADD_INGREDIENT, ingredientName : ingName}),
-            onIngredientRemoved : (ingName) => dispatch({type : actionTypes.REMOVE_INGREDIENT, ingredientName : ingName})
+            onIngredientAdded : (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
+            onIngredientRemoved : (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
         }
 };
 
